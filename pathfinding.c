@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/01/12 18:06:53 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/02/14 19:19:02 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,10 +166,13 @@ void	ft_pathfinding(t_prog *pg, int x, int y)
 			pg->map.tab[y][x] = 'e';
 		else if (pg->map.tab[y][x] == 'M')
 			pg->map.tab[y][x] = 'm';
-		ft_pathfinding(pg, x, y + 1);
-		ft_pathfinding(pg, x + 1, y);
-		ft_pathfinding(pg, x - 1, y);
-		ft_pathfinding(pg, x, y - 1);
+		if (pg->map.tab[y][x] != 'e')
+		{
+			ft_pathfinding(pg, x, y + 1);
+			ft_pathfinding(pg, x + 1, y);
+			ft_pathfinding(pg, x - 1, y);
+			ft_pathfinding(pg, x, y - 1);
+		}
 	}
 }
 
