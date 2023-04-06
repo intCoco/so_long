@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 03:19:14 by chuchard          #+#    #+#             */
-/*   Updated: 2023/01/11 20:02:27 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/04/06 21:12:46 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -527,47 +527,48 @@ void	print_game(t_prog pg)
 	//ft_print_pathfinding(pg.map);
 }
 
-int	ft_close(t_prog *pg)
+int	ft_close(t_map *map, char *err_txt)
 {
 	int	i;
 
 	i = -1;
-	while (++i < pg->map.size.y + 1)
+	while (++i < map->size.y + 1)
 	{
-		free(pg->map.tab[i]);
-		free(pg->map.tab2[i]);
+		if (map->tab[i])
+			free(map->tab[i]);
+		if (map->tab2[i])
+			free(map->tab2[i]);
 	}
-	free(pg->map.tab);
-	free(pg->map.tab2);
-	system("leaks solong.out");
+	if (map->tab)
+		free(map->tab);
+	if (map->tab2)
+		free(map->tab2);
+	if (err_txt != NULL)
+		exit(ft_printf("%s\n", err_txt));
 	exit(0);
 }
+
+int	main_args_parsing(int ac, char **av);
 
 int	main(int ac, char **av)
 {
 	int		fd;
 	t_prog	pg;
 
-	if (ac > 2)
-		return (ft_printf("Error\nToo many arguments\n"));
-	if (ac == 1)
-		return (ft_printf("Error\nPlease, make sure to fill in the map name\n"));
-	else if (ft_checkmapname(av[1]) == 1)
-		return (ft_printf("Error\nInvalid map name\nMake sure your map file ends with \".ber\"\n"));
+	if (main_args_parsing(ac, av) != 0)
+		return (1);
 	ft_bzero(&pg, sizeof(t_prog));
+	import_all_sprites(&pg);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 		return (ft_printf("Error\nFailed to open the map\n\n"));
 	pg.map.tab = ft_readmap(fd);
 	close(fd);
 	if (!pg.map.tab)
-		return (ft_return(pg.map));
+		ft_close(&pg.map, "Malloc error\n");
 	pg = ft_mapinit(pg);
-	if (pg.ret == 1)
-		return (ft_return(pg.map));
 	pg.mlx = mlx_init();
-	pg.wdw = ft_new_window(pg.mlx, 1000, 1000, "so_long");
-	import_all_sprites(&pg);
+	pg.wdw = ft_new_window(pg.mlx, 1000, 1000, "Pokemon : Gotta catch em all");
 	mlx_hook(pg.wdw.ref, 2, 0, ft_input, &pg);
 	mlx_hook(pg.wdw.ref, 17, 0, ft_close, &pg);
 	mlx_loop_hook(pg.mlx, *ft_update, &pg);

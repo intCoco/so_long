@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:27:06 by chuchard          #+#    #+#             */
-/*   Updated: 2023/01/11 20:10:52 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/04/06 19:52:41 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	ft_input(int key, t_prog *pg)
 		if (key == 3)
 			pg->run += 1;
 		if (key == 14 && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'e' && pg->map.obj.c_nb == 0)
-			ft_close(pg);
+			ft_close(pg, NULL);
 		if (key >= 83 && key <= 85)
 			pg->pkm_nb = key - 83;
 		pg->map.tab[pg->pl.pos.y][pg->pl.pos.x] = 'p';
@@ -266,7 +266,7 @@ int	ft_update(t_prog *pg)
 			if (pg->begin == 0)
 				pg->begin = 1;
 			else
-				ft_close(pg);
+				ft_close(pg, NULL);
 			pg->i = 0;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solong.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:27:33 by chuchard          #+#    #+#             */
-/*   Updated: 2023/01/11 19:59:59 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/04/06 21:12:51 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ typedef struct s_prog {
 }				t_prog;
 
 char	**ft_readmap(int fd);
-int		ft_return(t_map map);
 t_prog	ft_mapinit(t_prog prog);
 int		ft_check_error(t_prog prog);
 int		ft_input(int key, t_prog *prog);
@@ -141,8 +140,7 @@ void	ft_find_p(t_prog *prog);
 void	ft_print_pathfinding(t_map map);
 t_prog	ft_encheck(t_prog prog);
 t_prog	ft_interac_en(t_prog prog, t_vector *cd);
-int		ft_close(t_prog *prog);
-int		ft_checkmapname(char *str);
+int		ft_close(t_map *map, char *err_txt);
 
 t_image	ft_new_sprite(void *mlx, char *path);
 t_wdw	ft_new_window(void *mlx, int widht, int height, char *name);
