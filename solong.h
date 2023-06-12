@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solong.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:27:33 by chuchard          #+#    #+#             */
-/*   Updated: 2023/04/06 21:12:51 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:38:36 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,13 @@ typedef struct s_prog {
 	int			run;
 	int			i;
 	int			frame;
-	int			lkey;
-	int			pkm_nb;
-	int			pkm_ev;
-	int			cur_sel;
-	int			select;
-	int			bol;
+	int			lkey;		//previous key pressed (saved for next pok move)
+	int			pkm_nb;		//current pok selected
+	int			pkm_ev;		//current pok evolution
+	int			cur_sel;	//temp pok selection before validation
+	int			select;		//pokemon selection state (0-not selected/1-selected for boolean/2-def selected)
+	int			bol;		//boolean pok selection
+	int			hold[4];	//input/release
 }				t_prog;
 
 char	**ft_readmap(int fd);
@@ -140,7 +141,9 @@ void	ft_find_p(t_prog *prog);
 void	ft_print_pathfinding(t_map map);
 t_prog	ft_encheck(t_prog prog);
 t_prog	ft_interac_en(t_prog prog, t_vector *cd);
-int		ft_close(t_map *map, char *err_txt);
+int		ft_close(char *err_txt);
+void	ft_pick(t_prog *pg);
+
 
 t_image	ft_new_sprite(void *mlx, char *path);
 t_wdw	ft_new_window(void *mlx, int widht, int height, char *name);

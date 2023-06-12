@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_errors.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/04/06 21:06:47 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:54:22 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.h"
+#include "../../solong.h"
 
 // Counts every collectibles/exits/spawnpoints, checks if the map is surrounded
 // by walls and if each character is allowed.

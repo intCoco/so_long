@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   import_sprites_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:37:54 by chuchard          #+#    #+#             */
-/*   Updated: 2023/04/06 14:14:41 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:54:26 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.h"
+#include "../../solong.h"
 
 void	import_player_sprites(t_prog *pg)
 {

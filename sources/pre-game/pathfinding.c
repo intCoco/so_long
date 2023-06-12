@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/04/06 21:18:04 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/12 19:56:29 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.h"
+#include "../../solong.h"
 
 // Prints every steps of pathfinding.
 
-/*void	ft_print_pathfinding(t_map map)
+void	ft_print_pathfinding(t_map map)
 {
+	usleep(200000);
 	printf("\n");
 	for (int i = 0; i < map.size.x + 1; i++)
 		printf("----");
@@ -34,7 +35,7 @@
 			printf("----");
 		printf("-\n");
 	}
-}*/
+}
 
 // Checks the reachable coordinates of the map.
 // If a '0' is reachable, it becomes an 'x' and
@@ -42,6 +43,11 @@
 
 void	ft_pathfinding(t_map *map, int x, int y)
 {
+	//ft_print_pathfinding(*map);
+	if (map->tab[y][x] == '1' || map->tab[y][x] == 'x'
+		|| map->tab[y][x] == 'c' || map->tab[y][x] == 'e'
+		|| map->tab[y][x] == 'p' || map->tab[y][x] == 'f')
+		return ;
 	if (map->tab[y][x] == '0')
 		map->tab[y][x] = 'x';
 	else if (map->tab[y][x] == 'P')
@@ -60,3 +66,4 @@ void	ft_pathfinding(t_map *map, int x, int y)
 		ft_pathfinding(map, x, y - 1);
 	}
 }
+

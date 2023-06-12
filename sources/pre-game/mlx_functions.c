@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:40:21 by chuchard          #+#    #+#             */
-/*   Updated: 2023/04/06 20:39:18 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:36:36 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.h"
+#include "../../solong.h"
 
 t_image	ft_new_sprite(void *mlx, char *path)
 {
 	t_image	img;
 
 	img.ref = mlx_xpm_file_to_image(mlx, path, &img.size.x, &img.size.y);
-	if (!img.ref)
+	if (img.ref == 0)
 	{
 		ft_printf("Sprite import error, please make sure no file is missing\n");
 		exit(1);

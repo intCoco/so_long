@@ -1,14 +1,29 @@
-NAME = solong.out
+NAME = so_long
 SRC = 	main.c \
-		pathfinding.c \
-		readmap.c \
-		hooks.c \
-		import_sprites.c \
-		mlx_functions.c \
+		sources/hooks/hooks.c \
+		sources/imports/import_sprites_1.c \
+		sources/imports/import_sprites_2.c \
+		sources/pre-game/arguments_parsing.c \
+		sources/pre-game/check_map_errors.c \
+		sources/pre-game/map_init.c \
+		sources/pre-game/map_modifications.c \
+		sources/pre-game/mlx_functions.c \
+		sources/pre-game/pathfinding.c \
+		sources/pre-game/readmap.c \
 
-OBJ = $(SRC:.c=.o)
+OBJ = main.o \
+		hooks.o \
+		import_sprites_1.o \
+		import_sprites_2.o \
+		arguments_parsing.o \
+		check_map_errors.o \
+		map_init.o \
+		map_modifications.o \
+		mlx_functions.o \
+		pathfinding.o \
+		readmap.o \
 
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 LINKS = -lmlx -framework OpenGL -framework AppKit libft/libft.a
 
 NONE='\033[0m'
@@ -23,12 +38,12 @@ $(NAME): $(OBJ)
 	@echo $(CURSIVE)$(GRAY) "  - Compiling libft..." $(NONE)
 	@make -C libft/
 	@echo $(CURSIVE)$(GRAY) "  - Compiling $(NAME)..." $(NONE)
-	@gcc $(FLAGS) $(OBJ) $(LINKS) -o $(NAME)
+	@gcc $(CFLAGS) $(OBJ) $(LINKS) -o $(NAME) 
 	@echo $(GREEN)"	- Compiled -"$(NONE)
 
 $(OBJ): $(SRC)
 	@echo $(CURSIVE)$(GRAY) "  - Making object files..." $(NONE)
-	@gcc $(FLAGS) -c $(SRC)
+	@gcc $(CFLAGS) -c $(SRC)
 
 exe: all
 	@echo "     - Executing $(NAME)... \n"

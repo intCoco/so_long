@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:27:06 by chuchard          #+#    #+#             */
-/*   Updated: 2023/04/06 19:52:41 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:21:14 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.h"
+#include "../../solong.h"
 #include <stdio.h>
 
 void	ft_fcg_cood(t_char *chr)
@@ -82,84 +82,32 @@ int	ft_input_pkm(t_prog *pg)
 
 // Performs the necessary actions when a particular key is pressed
 
-int	ft_input(int key, t_prog *pg)
+int	player_movements(int key, t_prog *pg)
 {
-	int		y;
-	int		x;
-
 	if (pg->pl.mov == 0 && pg->begin == 3 && pg->tanim == 0 && pg->excl_b == 0)
 	{
-		x = pg->pl.fcg.x;
-		y = pg->pl.fcg.y;
 		pg->map.tab[pg->pl.pos.y][pg->pl.pos.x] = 'x';
+		if (pg->pkm.count == 0)
+			pg->map.tab[pg->pl.pos.y][pg->pl.pos.x] = '.';
 		if (pg->pl.mov == 0 && pg->pick == 0)
-			ft_dir_input(key, &pg->pl);
-		ft_fcg_cood(&pg->pl);
-		if (pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] != '1' && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] != 'c' && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] != 'e' && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] != 'm' && pg->pl.mov == 0 && pg->pick == 0 && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] != '2')
 		{
-			if (key == 0 || key == 1 || key == 2 || key == 13)
-				ft_input_pkm(pg);
-			if (ft_move(key, &pg->pl) == 1)
+			ft_dir_input(key, &pg->pl);
+			ft_fcg_cood(&pg->pl);
+			if ((pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'x'
+				|| pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == '.'))
 			{
-				pg->pl.mov = 1;
-				pg->pl.count++;
-				pg->lkey = key;
+				if (key == 0 || key == 1 || key == 2 || key == 13)
+					ft_input_pkm(pg);
+				if (ft_move(key, &pg->pl) == 1)
+				{
+					pg->pl.mov = 1;
+					pg->pl.count++;
+					pg->lkey = key;
+				}
 			}
 		}
-		if (key == 14 && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'c')
-			ft_pick(pg);
-		if (key == 14 && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'm')
-		{
-			pg->en.d = pg->pl.d + 2;
-			if (pg->pl.d >= 2)
-				pg->en.d -= 4;
-		}
-		if (key == 3)
-			pg->run += 1;
-		if (key == 14 && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'e' && pg->map.obj.c_nb == 0)
-			ft_close(pg, NULL);
-		if (key >= 83 && key <= 85)
-			pg->pkm_nb = key - 83;
 		pg->map.tab[pg->pl.pos.y][pg->pl.pos.x] = 'p';
 	}
-	if (key == 14 && pg->excl_b == 3 && pg->tanim == 0)
-		pg->tanim = 1;
-	if (pg->begin == 2 && key == 14)
-		pg->begin = 3;
-	if (pg->select == 1 && pg->begin == 1)
-	{
-		if (key == 13 && pg->begin == 1)
-			pg->bol = 1;
-		if (key == 1 && pg->begin == 1)
-			pg->bol = 0;
-		if (key == 14 && pg->bol == 1)
-		{
-			pg->begin = 2;
-			pg->i = 0;
-		}
-		if (key == 14 && pg->bol == 0)
-			pg->select = 2;
-	}
-	if (pg->select == 0 && pg->begin == 1)
-	{
-		if (key == 0 && pg->cur_sel > 0)
-			pg->cur_sel -= 1;
-		if (key == 2 && pg->cur_sel < 2)
-			pg->cur_sel += 1;
-		if (key == 14)
-		{
-			pg->pkm_nb = pg->cur_sel;
-			pg->select = 1;
-		}
-	}
-	if (pg->select == 2)
-		pg->select = 0;
-	//printf("select = %d\nbol = %d\n", pg->select, pg->bol);
-	//printf("select = %d\nbol = %d\n", pg->select, pg->bol);
-	if (key == 53)
-		pg->end = 1;
-	//ft_print_pathfinding(pg->map);
-	//printf("Key pressed -> %d\n", key);
 	return (0);
 }
 
@@ -182,7 +130,7 @@ void	ft_fight_anim(t_prog *pg)
 
 // This function is called on every loop/frame.
 // It's used to make the animations like the opening one,
-// to smoothen the movements and to make timers. 
+// to smoothen the movements and to make timers.
 
 int	ft_update(t_prog *pg)
 {
@@ -195,11 +143,11 @@ int	ft_update(t_prog *pg)
 		pg->timer2 = 0;
 	if (pg->timer2 >= 50)
 		pg->timer2 = 0;
-	
 	// Anim choix pokemon
 	if (pg->begin == 1 && pg->frame % 5 == 0 && pg->i < 23)
 		pg->i++;
-
+	if (pg->i >= 23 && pg->begin == 2)
+		pg->i = 0;
 	// In game
 	else if (pg->begin == 3 && pg->end == 0)
 	{
@@ -246,7 +194,6 @@ int	ft_update(t_prog *pg)
 				pg->pkm.mov += 6;
 			if (pg->pkm.mov >= SQ_L)
 				pg->pkm.mov = 0;
-			
 			if (pg->pl.count >= 100 && pg->pl.count < 200)
 				pg->pkm_ev = 1;
 			if (pg->pl.count >= 200 && pg->pl.count < 300)
@@ -266,10 +213,18 @@ int	ft_update(t_prog *pg)
 			if (pg->begin == 0)
 				pg->begin = 1;
 			else
-				ft_close(pg, NULL);
+				ft_close(NULL);
 			pg->i = 0;
 		}
 	}
+	if (pg->hold[0] == 1 && pg->pl.mov == 0)
+		player_movements(13, pg);
+	if (pg->hold[1] == 1 && pg->pl.mov == 0)
+		player_movements(0, pg);
+	if (pg->hold[2] == 1 && pg->pl.mov == 0)
+		player_movements(1, pg);
+	if (pg->hold[3] == 1 && pg->pl.mov == 0)
+		player_movements(2, pg);
 	print_game(*pg);
 	return (0);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/04/06 21:17:27 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/12 22:44:04 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.h"
+#include "../../solong.h"
 
 // Finds player's coordinates.
 
@@ -48,21 +48,26 @@ void	ft_set_vt_fences(t_map *map, int x, int y);
 void	ft_set_tree(t_map *map);
 void	ft_set_misc(t_map *map);
 void	ft_tabdup(t_map *map);
+void	ft_check_map(t_prog *pg);
+void	ft_check_pathfinding(t_map *map);
+void	ft_print_error(t_map map);
+void	ft_pathfinding(t_map *map, int x, int y);
 
 t_prog	ft_mapinit(t_prog pg)
 {
 	pg.pl.d = 2;
+	pg.en.d = 2;
+	pg.pkm.d = 2;
 	ft_find_p(&pg);
 	ft_mapsize(&pg.map);
 	ft_check_map(&pg);
-	ft_count_obj(&pg);
+	ft_tabdup(&pg.map);
 	if (pg.pl.pos.x && pg.pl.pos.y)
 	{
-		ft_pathfinding(&pg, pg.pl.pos.x, pg.pl.pos.y);
-		ft_check_pathfinding(&pg);
+		ft_pathfinding(&pg.map, pg.pl.pos.x, pg.pl.pos.y);
+		ft_check_pathfinding(&pg.map);
 	}
 	ft_set_misc(&pg.map);
-	ft_print_pathfinding(pg.map);
 	ft_print_error(pg.map);
 	return (pg);
 }

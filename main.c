@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 03:19:14 by chuchard          #+#    #+#             */
-/*   Updated: 2023/04/06 21:12:46 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:14:06 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ void	print_im(t_prog pg, t_image im, int x, int y)
 {
 	mlx_put_image_to_window(pg.mlx, pg.wdw.ref, im.ref,
 		x - (im.size.x / 2), y - im.size.y);
+}
+
+t_vector	ad(int x, int y)
+{
+	t_vector	ad;
+
+	ad.x = x;
+	ad.y = y;
+	
+	return (ad);
 }
 
 void	print_mov(t_prog pg, t_image im, t_vector cd, t_vector ad)
@@ -43,81 +53,73 @@ void	print_mov(t_prog pg, t_image im, t_vector cd, t_vector ad)
 			(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad.y);
 }
 
-void	print_mov_pkm(t_prog pg, t_image im, t_vector cd, t_vector ad)
+void	print_mov_pkm(t_prog pg, t_image im, t_vector cd, t_vector ad2)
 {
-	if (pg.pl.d == 0 && pg.pl.mov)
+	if (pg.pkm.count == 0)
+			print_mov(pg, im, cd, ad(0, 0));
+	else if (pg.pl.d == 0 && pg.pl.mov)
 	{
 		if (pg.pkm.d == 0)
-			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad.x,
-				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad.y);
+			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad2.x,
+				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad2.y);
 		if (pg.pkm.d == 1)
-			print_im(pg, im, (cd.x - pg.pl.pos.x - 1) * SQ_L + 500 + ad.x + pg.pkm.mov,
-				(cd.y - pg.pl.pos.y - 1) * SQ_L + pg.pl.mov + 244 + ad.y);
+			print_im(pg, im, (cd.x - pg.pl.pos.x - 1) * SQ_L + 500 + ad2.x + pg.pkm.mov,
+				(cd.y - pg.pl.pos.y - 1) * SQ_L + pg.pl.mov + 244 + ad2.y);
 		if (pg.pkm.d == 2)
-			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad.x,
-				(cd.y - pg.pl.pos.y - 2) * SQ_L + pg.pl.mov + 244 + ad.y + pg.pkm.mov);
+			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad2.x,
+				(cd.y - pg.pl.pos.y - 2) * SQ_L + pg.pl.mov + 244 + ad2.y + pg.pkm.mov);
 		if (pg.pkm.d == 3)
-			print_im(pg, im, (cd.x - pg.pl.pos.x + 1) * SQ_L + 500 + ad.x - pg.pkm.mov,
-				(cd.y - pg.pl.pos.y - 1) * SQ_L + pg.pl.mov + 244 + ad.y);
+			print_im(pg, im, (cd.x - pg.pl.pos.x + 1) * SQ_L + 500 + ad2.x - pg.pkm.mov,
+				(cd.y - pg.pl.pos.y - 1) * SQ_L + pg.pl.mov + 244 + ad2.y);
 	}
 	else if (pg.pl.d == 2 && pg.pl.mov)
 	{
 		if (pg.pkm.d == 0)
-			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad.x,
-				(cd.y - pg.pl.pos.y + 2) * SQ_L - pg.pl.mov + 244 + ad.y - pg.pkm.mov);
+			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad2.x,
+				(cd.y - pg.pl.pos.y + 2) * SQ_L - pg.pl.mov + 244 + ad2.y - pg.pkm.mov);
 		if (pg.pkm.d == 1)
-			print_im(pg, im, (cd.x - pg.pl.pos.x - 1) * SQ_L + 500 + ad.x + pg.pkm.mov,
-				(cd.y - pg.pl.pos.y + 1) * SQ_L - pg.pl.mov + 244 + ad.y);
+			print_im(pg, im, (cd.x - pg.pl.pos.x - 1) * SQ_L + 500 + ad2.x + pg.pkm.mov,
+				(cd.y - pg.pl.pos.y + 1) * SQ_L - pg.pl.mov + 244 + ad2.y);
 		if (pg.pkm.d == 2)
-			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad.x,
-				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad.y);
+			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad2.x,
+				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad2.y);
 		if (pg.pkm.d == 3)
-			print_im(pg, im, (cd.x - pg.pl.pos.x + 1) * SQ_L + 500 + ad.x - pg.pkm.mov,
-				(cd.y - pg.pl.pos.y + 1) * SQ_L - pg.pl.mov + 244 + ad.y);
+			print_im(pg, im, (cd.x - pg.pl.pos.x + 1) * SQ_L + 500 + ad2.x - pg.pkm.mov,
+				(cd.y - pg.pl.pos.y + 1) * SQ_L - pg.pl.mov + 244 + ad2.y);
 	}
 	else if (pg.pl.d == 1 && pg.pl.mov)
 	{
 		if (pg.pkm.d == 0)
-			print_im(pg, im, (cd.x - pg.pl.pos.x + 1) * SQ_L + 500 + ad.x - pg.pl.mov,
-				(cd.y - pg.pl.pos.y + 1) * SQ_L + 244 + ad.y - pg.pkm.mov);
+			print_im(pg, im, (cd.x - pg.pl.pos.x + 1) * SQ_L + 500 + ad2.x - pg.pl.mov,
+				(cd.y - pg.pl.pos.y + 1) * SQ_L + 244 + ad2.y - pg.pkm.mov);
 		if (pg.pkm.d == 1)
-			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad.x,
-				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad.y);
+			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad2.x,
+				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad2.y);
 		if (pg.pkm.d == 2)
-			print_im(pg, im, (cd.x - pg.pl.pos.x + 1) * SQ_L + 500 + ad.x - pg.pl.mov,
-				(cd.y - pg.pl.pos.y - 1) * SQ_L + 244 + ad.y + pg.pkm.mov);
+			print_im(pg, im, (cd.x - pg.pl.pos.x + 1) * SQ_L + 500 + ad2.x - pg.pl.mov,
+				(cd.y - pg.pl.pos.y - 1) * SQ_L + 244 + ad2.y + pg.pkm.mov);
 		if (pg.pkm.d == 3)
-			print_im(pg, im, (cd.x - pg.pl.pos.x + 2) * SQ_L + 500 + ad.x - pg.pl.mov - pg.pkm.mov,
-				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad.y);
+			print_im(pg, im, (cd.x - pg.pl.pos.x + 2) * SQ_L + 500 + ad2.x - pg.pl.mov - pg.pkm.mov,
+				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad2.y);
 	}
 	else if (pg.pl.d == 3 && pg.pl.mov)
 	{
 		if (pg.pkm.d == 0)
-			print_im(pg, im, (cd.x - pg.pl.pos.x - 1) * SQ_L + 500 + ad.x + pg.pl.mov,
-				(cd.y - pg.pl.pos.y + 1) * SQ_L + 244 + ad.y - pg.pkm.mov);
+			print_im(pg, im, (cd.x - pg.pl.pos.x - 1) * SQ_L + 500 + ad2.x + pg.pl.mov,
+				(cd.y - pg.pl.pos.y + 1) * SQ_L + 244 + ad2.y - pg.pkm.mov);
 		if (pg.pkm.d == 1)
-			print_im(pg, im, (cd.x - pg.pl.pos.x - 2) * SQ_L + 500 + ad.x + pg.pl.mov + pg.pkm.mov,
-				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad.y);
+			print_im(pg, im, (cd.x - pg.pl.pos.x - 2) * SQ_L + 500 + ad2.x + pg.pl.mov + pg.pkm.mov,
+				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad2.y);
 		if (pg.pkm.d == 2)
-			print_im(pg, im, (cd.x - pg.pl.pos.x - 1) * SQ_L + 500 + ad.x + pg.pl.mov,
-				(cd.y - pg.pl.pos.y - 1) * SQ_L + 244 + ad.y + pg.pkm.mov);
+			print_im(pg, im, (cd.x - pg.pl.pos.x - 1) * SQ_L + 500 + ad2.x + pg.pl.mov,
+				(cd.y - pg.pl.pos.y - 1) * SQ_L + 244 + ad2.y + pg.pkm.mov);
 		if (pg.pkm.d == 3)
-			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad.x,
-				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad.y);
+			print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad2.x,
+				(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad2.y);
 	}
 	else
-		print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad.x,
-			(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad.y);
-}
-
-t_vector	ad(int x, int y)
-{
-	t_vector	ad;
-
-	ad.x = x;
-	ad.y = y;
-	
-	return (ad);
+		print_im(pg, im, (cd.x - pg.pl.pos.x) * SQ_L + 500 + ad2.x,
+			(cd.y - pg.pl.pos.y) * SQ_L + 244 + ad2.y);
 }
 
 void	print_ground(t_prog pg)
@@ -307,16 +309,6 @@ void	print_chars(t_prog pg, t_vector cd)
 		else if (pg.en.mov != 0)
 			print_mov(pg, pg.sp.en[pg.en.count % 2 + 1][pg.en.d], cd, ad(0, 0));
 	}
-	else if (pg.map.tab[cd.y][cd.x] == 'p')
-	{
-		if (pg.pick >= 1)
-			print_im(pg, pg.sp.pc[pg.pl.d], 500, 244);
-		if (pg.pl.mov == 0 && pg.pick == 0)
-			print_im(pg, pg.sp.pl[pg.run % 2][0][pg.pl.d], 500, 244);
-		if (pg.pl.mov != 0)
-			print_im(pg, pg.sp.pl[pg.run % 2][pg.pl.count % 2 + 1][pg.pl.d],
-				500, 244);
-	}
 	else if (pg.map.tab[cd.y][cd.x] == '.')
 		print_mov_pkm(pg, pg.sp.pkm[pg.pkm_nb][pg.pkm_ev][pg.pkm.count % 2][pg.pkm.d], cd, ad(0, 0));
 }
@@ -432,9 +424,6 @@ void	print_fences(t_prog pg, t_vector cd)
 
 void	print_fight_anim(t_prog pg)
 {
-	double j;
-
-	j = pg.i;
 	if (pg.i <= 9)
 		print_im(pg, pg.sp.anim[pg.i], 500, 240 + pg.sp.anim[pg.i].size.y / 2);
 	else if (pg.i == 10)
@@ -452,6 +441,17 @@ void	print_excl(t_prog pg)
 		print_im(pg, pg.sp.excl, (pg.en.pos.x - pg.pl.pos.x) * SQ_L + 500, (pg.en.pos.y - pg.pl.pos.y - 1) * SQ_L + 270);
 }
 
+void	print_player(t_prog pg)
+{
+	if (pg.pick >= 1)
+		print_im(pg, pg.sp.pc[pg.pl.d], 500, 244);
+	if (pg.pl.mov == 0 && pg.pick == 0)
+		print_im(pg, pg.sp.pl[pg.run % 2][0][pg.pl.d], 500, 244);
+	if (pg.pl.mov != 0)
+		print_im(pg, pg.sp.pl[pg.run % 2][pg.pl.count % 2 + 1][pg.pl.d],
+			500, 244);
+}
+
 void	print_game(t_prog pg)
 {
 	t_vector	cd;
@@ -464,7 +464,8 @@ void	print_game(t_prog pg)
 	mlx_clear_window(pg.mlx, pg.wdw.ref);
 	if (pg.begin != 0 && pg.end == 0)
 	{
-		if (pg.i < 10 && !((pg.tanim > 25 && pg.tanim < 50) || (pg.tanim > 75 && pg.tanim < 100)) && pg.begin > 1)
+		if (!((pg.tanim > 25 && pg.tanim < 50)
+			|| (pg.tanim > 75 && pg.tanim < 100)) && pg.begin > 1)
 		{
 			print_ground(pg);
 			print_up_walls(pg);
@@ -474,7 +475,8 @@ void	print_game(t_prog pg)
 				cd.x = pg.pl.pos.x - 7;
 				while (cd.x < pg.pl.pos.x + 8)
 				{
-					if (cd.y >= 0 && cd.x >= 0 && cd.y <= pg.map.size.y && cd.x <= pg.map.size.x)
+					if (cd.y >= 0 && cd.x >= 0
+						&& cd.y <= pg.map.size.y && cd.x <= pg.map.size.x)
 					{
 						print_collec(pg, cd);
 						print_chars(pg, cd);
@@ -484,6 +486,8 @@ void	print_game(t_prog pg)
 					}
 					cd.x++;
 				}
+				if (cd.y == pg.pl.pos.y)
+					print_player(pg);
 				cd.y++;
 			}
 			ft_print_down_walls(pg);
@@ -527,25 +531,84 @@ void	print_game(t_prog pg)
 	//ft_print_pathfinding(pg.map);
 }
 
-int	ft_close(t_map *map, char *err_txt)
+int	ft_close(char *err_txt)
 {
-	int	i;
-
-	i = -1;
-	while (++i < map->size.y + 1)
-	{
-		if (map->tab[i])
-			free(map->tab[i]);
-		if (map->tab2[i])
-			free(map->tab2[i]);
-	}
-	if (map->tab)
-		free(map->tab);
-	if (map->tab2)
-		free(map->tab2);
 	if (err_txt != NULL)
 		exit(ft_printf("%s\n", err_txt));
 	exit(0);
+}
+
+int	pk_selection(int key, t_prog *pg)
+{
+	if (pg->select == 0 && pg->begin == 1)	//phase de selection
+	{
+		if (key == 14)	//selection cette pokbll si on appuie sur e
+		{
+			pg->pkm_nb = pg->cur_sel;
+			pg->select = 1;
+		}
+		if (key == 0 && pg->cur_sel > 0)	//change de pok si on appuie sur a
+			pg->cur_sel -= 1;
+		if (key == 2 && pg->cur_sel < 2)	//ou d
+			pg->cur_sel += 1;
+	}
+	else if (pg->select == 1 && pg->begin == 1)	// selection pokemon
+	{
+		if (key == 13)		//si fleche haut bool = 1
+			pg->bol = 1;
+		if (key == 1)		//si fleche bas bool = 0
+			pg->bol = 0;
+		if (key == 14 && pg->bol == 1)	//valide la selection
+			pg->begin = 2;
+		else if (key == 14 && pg->bol == 0)	//revient en arriere si on choisi "non"
+			pg->select = 0;
+	}
+	return(0);
+}
+
+void	ingame_inputs(int key, t_prog *pg)
+{
+	if (key == 14 && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'c')	//ramassage
+		ft_pick(pg);
+	if (key == 14 && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'm')	//parler au mechant
+	{
+		pg->en.d = pg->pl.d + 2;
+		if (pg->pl.d >= 2)
+			pg->en.d -= 4;
+	}
+	if (key == 3)	//toggle course
+		pg->run += 1;
+	if (key == 14 && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'e' && pg->map.obj.c_nb == 0)	//exit si on parle a la fille apres avoir tout ramassé
+		ft_close(NULL);
+	if (key >= 83 && key <= 85)	//cheat code changement de pok
+		pg->pkm_nb = key - 83;
+}
+
+int	ft_input(int key, t_prog *pg)
+{
+	if (pg->begin == 2 && key == 14)	// dialogue debut
+		pg->begin = 3;
+	pk_selection(key, pg);
+	if (key == 13)	// definition des holds
+		pg->hold[0] = 1;
+	else if (key == 0 || key == 1 || key == 2)
+		pg->hold[key + 1] = 1;
+	else if (pg->pl.mov == 0 && pg->begin == 3 && pg->tanim == 0 && pg->excl_b == 0)	//En jeux, si inactif
+		ingame_inputs(key, pg);
+	if (key == 14 && pg->excl_b == 3 && pg->tanim == 0)	//passe le dialogue du mechant
+		pg->tanim = 1;	//lance le timer et le clignotement avant l'anim de combat 
+	if (key == 53)	//ferme la console
+		pg->end = 1;
+	return (0);
+}
+
+int	ft_release(int	key, t_prog *pg)
+{
+	if (key == 13)
+		pg->hold[0] = 0;
+	if (key == 0 || key == 1 || key == 2)
+		pg->hold[key + 1] = 0;
+	return (0);
 }
 
 int	main_args_parsing(int ac, char **av);
@@ -558,18 +621,19 @@ int	main(int ac, char **av)
 	if (main_args_parsing(ac, av) != 0)
 		return (1);
 	ft_bzero(&pg, sizeof(t_prog));
-	import_all_sprites(&pg);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 		return (ft_printf("Error\nFailed to open the map\n\n"));
 	pg.map.tab = ft_readmap(fd);
 	close(fd);
 	if (!pg.map.tab)
-		ft_close(&pg.map, "Malloc error\n");
+		ft_close("Malloc error\n");
 	pg = ft_mapinit(pg);
 	pg.mlx = mlx_init();
 	pg.wdw = ft_new_window(pg.mlx, 1000, 1000, "Pokemon : Gotta catch em all");
+	import_all_sprites(&pg);
 	mlx_hook(pg.wdw.ref, 2, 0, ft_input, &pg);
+	mlx_hook(pg.wdw.ref, 3, 0, ft_release, &pg);
 	mlx_hook(pg.wdw.ref, 17, 0, ft_close, &pg);
 	mlx_loop_hook(pg.mlx, *ft_update, &pg);
 	mlx_loop(pg.mlx);

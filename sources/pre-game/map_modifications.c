@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_modifications.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/04/06 19:50:02 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:25:35 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.h"
+#include "../../solong.h"
 
 void	ft_set_hz_fences(t_map *map, int x, int y)
 {
@@ -64,8 +64,8 @@ void	ft_set_tree(t_map *map)
 		while (x < map->size.x)
 		{
 			if (y < map->size.y - 1 && x < map->size.x - 1
-                && map->tab2[y][x] == '1' && map->tab2[y + 1][x + 1] == '1'
-                && map->tab2[y][x + 1] == '1' && map->tab2[y + 1][x] == '1')
+				&& map->tab2[y][x] == '1' && map->tab2[y + 1][x + 1] == '1'
+				&& map->tab2[y][x + 1] == '1' && map->tab2[y + 1][x] == '1')
 			{
 				map->tab[y + 1][x] = '2';
 				map->tab2[y + 1][x] = '0';
@@ -115,12 +115,12 @@ void	ft_tabdup(t_map *map)
 	i = 0;
 	map->tab2 = malloc(sizeof(char *) * map->size.y + 1);
 	if (!map->tab2)
-		ft_close(map, "Malloc error\n");
+		ft_close("Malloc error\n");
 	while (map->tab[i])
 	{
 		map->tab2[i] = ft_strdup(map->tab[i]);
 		if (!map->tab2[i])
-		    ft_close(map, "Malloc error\n");
+			ft_close("Malloc error\n");
 		i++;
 	}
 }

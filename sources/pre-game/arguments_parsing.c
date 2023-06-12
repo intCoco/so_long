@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   arguments_parsing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/04/06 21:14:58 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:10:51 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.h"
+#include "../../solong.h"
 
 int	ft_checkmapname(char *str)
 {
@@ -29,7 +29,7 @@ int	ft_checkmapname(char *str)
 
 int	main_args_parsing(int ac, char **av)
 {
-	if (ft_strncmp(av[0], "so_long\n", -1) != 0)
+	if (ft_strncmp(av[0], "./so_long", -1) != 0)
 		return (ft_printf("Please run the program directly from the main directory\n"));
 	if (ac > 2)
 		return (ft_printf("Error\nToo many arguments\n"));

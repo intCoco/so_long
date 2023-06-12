@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   readmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuchard <chuchard@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:20:41 by chuchard          #+#    #+#             */
-/*   Updated: 2023/04/06 21:14:12 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:54:09 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.h"
+#include "../../solong.h"
 
 char	*ft_returngnl(char *buffer, char *stock, int nb_read)
 {
