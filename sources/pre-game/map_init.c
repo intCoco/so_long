@@ -6,29 +6,32 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/12 22:44:04 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:06:12 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../solong.h"
 
-// Finds player's coordinates.
-
-void	ft_find_p(t_prog *pg)
+void	ft_find_chars(t_prog *pg)
 {
-	pg->pl.pos.y = 0;
-	while (pg->map.tab[pg->pl.pos.y])
+	t_vector	cd;
+
+	cd.y = 0;
+	while (pg->map.tab[cd.y])
 	{
-		pg->pl.pos.x = 0;
-		while (pg->map.tab[pg->pl.pos.y][pg->pl.pos.x] != 'P'
-			&& pg->map.tab[pg->pl.pos.y][pg->pl.pos.x])
-			pg->pl.pos.x++;
-		if (pg->map.tab[pg->pl.pos.y][pg->pl.pos.x] == 'P')
-			return ;
-		pg->pl.pos.y++;
+		cd.x = 0;
+		while (pg->map.tab[cd.y][cd.x])
+		{
+			cd.x++;
+			if (pg->map.tab[cd.y][cd.x] == 'P')
+				pg->pl.pos = cd;
+			if (pg->map.tab[cd.y][cd.x] == 'M')
+				pg->en.pos = cd;
+			if (pg->map.tab[cd.y][cd.x] == 'E')
+				pg->ex.pos = cd;
+		}
+		cd.y++;
 	}
-	pg->pl.pos.x = 0;
-	pg->pl.pos.y = 0;
 }
 
 // Gives tab's lenght and width.
@@ -52,13 +55,14 @@ void	ft_check_map(t_prog *pg);
 void	ft_check_pathfinding(t_map *map);
 void	ft_print_error(t_map map);
 void	ft_pathfinding(t_map *map, int x, int y);
+void	ft_find_chars(t_prog *pg);
 
 t_prog	ft_mapinit(t_prog pg)
 {
 	pg.pl.d = 2;
 	pg.en.d = 2;
 	pg.pkm.d = 2;
-	ft_find_p(&pg);
+	ft_find_chars(&pg);
 	ft_mapsize(&pg.map);
 	ft_check_map(&pg);
 	ft_tabdup(&pg.map);

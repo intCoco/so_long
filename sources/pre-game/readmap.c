@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:20:41 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/12 17:54:09 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:08:59 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ char	*get_file(int fd)
 	return (file);
 }
 
-char **ft_readmap(int fd)
+char	**ft_readmap(int fd)
 {
-	char **map;
-	char *file;
+	char	**map;
+	char	*file;
+
 	file = get_file(fd);
 	if (!file)
 		return (0);

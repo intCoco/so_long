@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/12 20:25:35 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:07:52 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void	ft_set_hz_fences(t_map *map, int x, int y)
 	if (map->tab2[y][x] != '1' && map->tab2[y][x] != 'v')
 		return ;
 	i = x;
-	while ((map->tab2[y][i] == '1' || map->tab2[y][i] == 'v') && i < map->size.x)
+	while ((map->tab2[y][i] == '1' || map->tab2[y][i] == 'v')
+		&& i < map->size.x)
 		i++;
 	if (i - x > 2)
+	{
 		while (x < i)
 		{
 			if (map->tab2[y][x] == 'v')
@@ -30,6 +32,7 @@ void	ft_set_hz_fences(t_map *map, int x, int y)
 				map->tab2[y][x] = 'h';
 			x++;
 		}
+	}
 }
 
 void	ft_set_vt_fences(t_map *map, int x, int y)
@@ -39,9 +42,11 @@ void	ft_set_vt_fences(t_map *map, int x, int y)
 	if (map->tab2[y][x] != '1' && map->tab2[y][x] != 'h')
 		return ;
 	i = y;
-	while ((map->tab2[i][x] == '1' || map->tab2[i][x] == 'h') && i < map->size.y)
+	while ((map->tab2[i][x] == '1' || map->tab2[i][x] == 'h')
+		&& i < map->size.y)
 		i++;
 	if (i - y > 2)
+	{
 		while (y < i)
 		{
 			if (map->tab2[y][x] == 'h')
@@ -50,6 +55,7 @@ void	ft_set_vt_fences(t_map *map, int x, int y)
 				map->tab2[y][x] = 'v';
 			y++;
 		}
+	}
 }
 
 void	ft_set_tree(t_map *map)
@@ -115,12 +121,12 @@ void	ft_tabdup(t_map *map)
 	i = 0;
 	map->tab2 = malloc(sizeof(char *) * map->size.y + 1);
 	if (!map->tab2)
-		ft_close("Malloc error\n");
+		ft_close(1);
 	while (map->tab[i])
 	{
 		map->tab2[i] = ft_strdup(map->tab[i]);
 		if (!map->tab2[i])
-			ft_close("Malloc error\n");
+			ft_close(1);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:27:33 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/12 21:38:36 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:24:20 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_sprites {
 	t_image		bol_crs;
 }				t_sprites;
 
-typedef struct s_prog {
+typedef struct s_pg {
 	void		*mlx;
 	t_wdw		wdw;
 	t_map		map;
@@ -115,9 +115,8 @@ typedef struct s_prog {
 	int			begin;
 	int			end;
 	int			timer;
-	int			timer2;
 	int			split;
-	int			tanim;
+	int			blink;
 	int			run;
 	int			i;
 	int			frame;
@@ -130,24 +129,30 @@ typedef struct s_prog {
 	int			hold[4];	//input/release
 }				t_prog;
 
-char	**ft_readmap(int fd);
-t_prog	ft_mapinit(t_prog prog);
-int		ft_check_error(t_prog prog);
-int		ft_input(int key, t_prog *prog);
-int		ft_update(t_prog *prog);
-void	draw_wall(t_prog prog);
-void	print_game(t_prog prog);
-void	ft_find_p(t_prog *prog);
-void	ft_print_pathfinding(t_map map);
-t_prog	ft_encheck(t_prog prog);
-t_prog	ft_interac_en(t_prog prog, t_vector *cd);
-int		ft_close(char *err_txt);
-void	ft_pick(t_prog *pg);
+char		**ft_readmap(int fd);
+t_prog		ft_mapinit(t_prog pg);
+int			ft_check_error(t_prog pg);
+int			ft_input(int key, t_prog *pg);
+int			ft_update(t_prog *pg);
+void		draw_wall(t_prog pg);
+void		print_game(t_prog *pg);
+void		ft_find_p(t_prog *pg);
+void		ft_print_pathfinding(t_map map);
+void		ft_encheck(t_prog *pg);
+void		ft_interac_en(t_prog *pg, t_vector *cd);
+int			ft_close(int merror);
+void		ft_pick(t_prog *pg);
+void		ft_fcg_cood(t_char *chr);
+void		ft_dir_input(int key, t_char *chr);
+int			ft_move(int key, t_char *chr);
 
+t_vector	ad(int x, int y);
+void		print_im(t_prog pg, t_image im, int x, int y);
+void		print_mov(t_prog pg, t_image im, t_vector cd, t_vector ad);
 
-t_image	ft_new_sprite(void *mlx, char *path);
-t_wdw	ft_new_window(void *mlx, int widht, int height, char *name);
+t_image		ft_new_sprite(void *mlx, char *path);
+t_wdw		ft_new_window(void *mlx, int widht, int height, char *name);
 
-void	import_all_sprites(t_prog *prog);
+void		import_all_sprites(t_prog *pg);
 
 #endif
