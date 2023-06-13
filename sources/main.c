@@ -6,11 +6,11 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 03:19:14 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/13 23:53:20 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/14 00:06:32 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.h"
+#include "../solong.h"
 
 int	main_args_parsing(int ac, char **av);
 int	ft_input(int key, t_prog *pg);

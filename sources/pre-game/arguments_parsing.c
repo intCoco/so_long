@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/13 22:06:01 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/14 00:07:45 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ int	ft_checkmapname(char *str)
 
 int	main_args_parsing(int ac, char **av)
 {
-	if (ft_strncmp(av[0], "./so_long", -1) != 0)
-		return (ft_printf("Please run the program directly from the"
+	if (ft_strncmp(av[0], "./so_long_bonus", -1) != 0)
+		return (ft_printf("Please run the program directly from the "
 				"main directory\n"));
 	if (ac > 2)
 		return (ft_printf("Error\nToo many arguments\n"));
 	if (ac == 1)
-		return (ft_printf("Error\nPlease,"
+		return (ft_printf("Error\nPlease, "
 				"make sure to inform the map's name\n"));
 	else if (ft_checkmapname(av[1]) == 1)
-		return (ft_printf("Error\nInvalid map name\nMake sure your map file"
+		return (ft_printf("Error\nInvalid map name\nMake sure your map file "
 				"ends with \".ber\"\n"));
 	return (0);
 }

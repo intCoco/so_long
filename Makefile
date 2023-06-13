@@ -1,6 +1,6 @@
 NAME = so_long
 
-SRC = 	main.c \
+SRC = 	sources/main.c \
 		sources/display/chars_display.c \
 		sources/display/events_display.c \
 		sources/display/game_display.c \
@@ -52,7 +52,7 @@ OBJ = 	main.o \
 
 NAME_BONUS = so_long_bonus
 
-SRC_BONUS = 	main.c \
+SRC_BONUS = 	sources/main.c \
 				sources/display/chars_display.c \
 				sources/display/events_display.c \
 				sources/display/game_display.c \
