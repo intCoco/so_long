@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_errors.c                                 :+:      :+:    :+:   */
+/*   check_map_errors_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:57:06 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:50:57 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../solong.h"
+#include "../../solong_bonus.h"
 
 // Counts every collectibles/exits/spawnpoints, checks if the map is surrounded
 // by walls and if each character is allowed.
@@ -27,6 +27,8 @@ static void	conditions(t_prog *pg, int x, int y)
 		pg->map.obj.e_nb += 1;
 	else if (pg->map.tab[y][x] == 'C')
 		pg->map.obj.c_nb += 1;
+	else if (pg->map.tab[y][x] == 'M')
+		pg->map.obj.m_nb += 1;
 	else if (pg->map.tab[y][x] != '0' && pg->map.tab[y][x] != '1')
 		pg->map.error.char_check = 1;
 }
@@ -100,7 +102,7 @@ void	ft_print_error_2(t_map map)
 void	ft_print_error(t_map map)
 {
 	if (map.obj.c_nb == 0 || map.obj.e_nb != 1 || map.obj.p_nb != 1
-		|| map.error.nr_e != 0 || map.error.nr_c != 0
+		|| map.obj.m_nb > 1 || map.error.nr_e != 0 || map.error.nr_c != 0
 		|| map.error.walls_check != 0 || map.error.rect_check != 0
 		|| map.error.char_check != 0 || map.error.fd_er == 1)
 	{
@@ -115,6 +117,8 @@ void	ft_print_error(t_map map)
 			ft_printf("No exit\n");
 		if (map.obj.e_nb > 1)
 			ft_printf("Several exits\n");
+		if (map.obj.m_nb > 1)
+			ft_printf("Several enemies\n");
 		ft_print_error_2(map);
 	}
 }

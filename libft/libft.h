@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:48:56 by chuchard          #+#    #+#             */
-/*   Updated: 2022/12/28 18:50:40 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:30:19 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ int		ft_lstsize(t_list *lst);
 
 int		ft_printf(const char *format, ...);
 int		ft_random(int max);
+int		ft_sqrt(int x);
 
 #endif

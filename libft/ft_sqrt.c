@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update.c                                           :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 17:27:06 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 17:39:29 by chuchard         ###   ########.fr       */
+/*   Created: 2023/06/14 15:29:33 by chuchard          #+#    #+#             */
+/*   Updated: 2023/06/14 15:29:39 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../solong.h"
-
-// This function is called on every loop/frame.
-// It's used to make the animations like the opening one,
-// to smoothen the movements and to make timers.
-
-int	ft_update(t_prog *pg)
+int	ft_sqrt(int x)
 {
-	player_behavior(pg);
-	print_game(pg);
-	return (0);
+	int	start;
+	int	mid;
+	int	end;
+	int	result;
+
+	if (x == 0 || x == 1)
+		return (x);
+	start = 1;
+	end = x;
+	while (start <= end)
+	{
+		mid = (start + end) / 2;
+		if (mid * mid == x)
+			return (mid);
+		if (mid * mid < x)
+		{
+			start = mid + 1;
+			result = mid;
+		}
+		else
+			end = mid - 1;
+	}
+	return (result);
 }

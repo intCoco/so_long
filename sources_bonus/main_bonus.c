@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 03:19:14 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 17:41:32 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:42:52 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../solong.h"
+#include "../solong_bonus.h"
+
+int	main_args_parsing(int ac, char **av);
+int	ft_input(int key, t_prog *pg);
+int	ft_release(int key, t_prog *pg);
 
 int	main(int ac, char **av)
 {

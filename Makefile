@@ -1,50 +1,30 @@
 NAME = so_long
 
 SRC = 	sources/main.c \
-		sources/display/chars_display.c \
-		sources/display/events_display.c \
 		sources/display/game_display.c \
-		sources/display/map_display.c \
-		sources/display/pokemon_display.c \
-		sources/display/walls_display.c \
 		sources/hooks/update.c \
 		sources/hooks/inputs_management.c \
-		sources/imports/import_sprites_1.c \
-		sources/imports/import_sprites_2.c \
+		sources/imports/import_sprites.c \
 		sources/in-game/char_management.c \
-		sources/in-game/enemy_management.c \
-		sources/in-game/exit_management.c \
 		sources/in-game/player_management.c \
-		sources/in-game/pokemon_management.c \
 		sources/pre-game/arguments_parsing.c \
 		sources/pre-game/check_map_errors.c \
 		sources/pre-game/map_init.c \
-		sources/pre-game/map_modifications.c \
 		sources/pre-game/mlx_functions.c \
 		sources/pre-game/pathfinding.c \
 		sources/pre-game/readmap.c \
 		sources/utils.c \
 
 OBJ = 	main.o \
-		chars_display.o \
-		events_display.o \
 		game_display.o \
-		map_display.o \
-		pokemon_display.o \
-		walls_display.o \
 		update.o \
 		inputs_management.o \
-		import_sprites_1.o \
-		import_sprites_2.o \
+		import_sprites.o \
 		char_management.o \
-		enemy_management.o \
-		exit_management.o \
 		player_management.o \
-		pokemon_management.o \
 		arguments_parsing.o \
 		check_map_errors.o \
 		map_init.o \
-		map_modifications.o \
 		mlx_functions.o \
 		pathfinding.o \
 		readmap.o \
@@ -52,55 +32,55 @@ OBJ = 	main.o \
 
 NAME_BONUS = so_long_bonus
 
-SRC_BONUS = 	sources/main.c \
-				sources/display/chars_display.c \
-				sources/display/events_display.c \
-				sources/display/game_display.c \
-				sources/display/map_display.c \
-				sources/display/pokemon_display.c \
-				sources/display/walls_display.c \
-				sources/hooks/update.c \
-				sources/hooks/inputs_management.c \
-				sources/imports/import_sprites_1.c \
-				sources/imports/import_sprites_2.c \
-				sources/in-game/char_management.c \
-				sources/in-game/enemy_management.c \
-				sources/in-game/exit_management.c \
-				sources/in-game/player_management.c \
-				sources/in-game/pokemon_management.c \
-				sources/pre-game/arguments_parsing.c \
-				sources/pre-game/check_map_errors.c \
-				sources/pre-game/map_init.c \
-				sources/pre-game/map_modifications.c \
-				sources/pre-game/mlx_functions.c \
-				sources/pre-game/pathfinding.c \
-				sources/pre-game/readmap.c \
-				sources/utils.c \
+SRC_BONUS = 	sources_bonus/main_bonus.c \
+				sources_bonus/display/chars_display_bonus.c \
+				sources_bonus/display/events_display_bonus.c \
+				sources_bonus/display/game_display_bonus.c \
+				sources_bonus/display/map_display_bonus.c \
+				sources_bonus/display/pokemon_display_bonus.c \
+				sources_bonus/display/walls_display_bonus.c \
+				sources_bonus/hooks/update_bonus.c \
+				sources_bonus/hooks/inputs_management_bonus.c \
+				sources_bonus/imports/import_sprites_1_bonus.c \
+				sources_bonus/imports/import_sprites_2_bonus.c \
+				sources_bonus/in-game/char_management_bonus.c \
+				sources_bonus/in-game/enemy_management_bonus.c \
+				sources_bonus/in-game/exit_management_bonus.c \
+				sources_bonus/in-game/player_management_bonus.c \
+				sources_bonus/in-game/pokemon_management_bonus.c \
+				sources_bonus/pre-game/arguments_parsing_bonus.c \
+				sources_bonus/pre-game/check_map_errors_bonus.c \
+				sources_bonus/pre-game/map_init_bonus.c \
+				sources_bonus/pre-game/map_modifications_bonus.c \
+				sources_bonus/pre-game/mlx_functions_bonus.c \
+				sources_bonus/pre-game/pathfinding_bonus.c \
+				sources_bonus/pre-game/readmap_bonus.c \
+				sources_bonus/utils_bonus.c \
 
-OBJ_BONUS = 	main.o \
-				chars_display.o \
-				events_display.o \
-				game_display.o \
-				map_display.o \
-				pokemon_display.o \
-				walls_display.o \
-				update.o \
-				inputs_management.o \
-				import_sprites_1.o \
-				import_sprites_2.o \
-				char_management.o \
-				enemy_management.o \
-				exit_management.o \
-				player_management.o \
-				pokemon_management.o \
-				arguments_parsing.o \
-				check_map_errors.o \
-				map_init.o \
-				map_modifications.o \
-				mlx_functions.o \
-				pathfinding.o \
-				readmap.o \
-				utils.o \
+OBJ_BONUS = 	main_bonus.o \
+				chars_display_bonus.o \
+				events_display_bonus.o \
+				game_display_bonus.o \
+				map_display_bonus.o \
+				pokemon_display_bonus.o \
+				walls_display_bonus.o \
+				update_bonus.o \
+				inputs_management_bonus.o \
+				import_sprites_1_bonus.o \
+				import_sprites_2_bonus.o \
+				char_management_bonus.o \
+				enemy_management_bonus.o \
+				exit_management_bonus.o \
+				player_management_bonus.o \
+				pokemon_management_bonus.o \
+				arguments_parsing_bonus.o \
+				check_map_errors_bonus.o \
+				map_init_bonus.o \
+				map_modifications_bonus.o \
+				mlx_functions_bonus.o \
+				pathfinding_bonus.o \
+				readmap_bonus.o \
+				utils_bonus.o \
 
 CFLAGS = -Wall -Wextra -Werror
 LINKS = -lmlx -framework OpenGL -framework AppKit libft/libft.a
@@ -146,6 +126,7 @@ clean:
 fclean: clean
 	@echo $(CURSIVE)$(RED) "  - Removing libft.a..." $(NONE)
 	@make fclean -C libft/
+	@echo $(CURSIVE)$(RED) "  - Removing $(NAME)..." $(NONE)
 	@echo $(CURSIVE)$(RED) "  - Removing $(NAME_BONUS)..." $(NONE)
 	@rm -rf $(NAME) $(NAME_BONUS)
 

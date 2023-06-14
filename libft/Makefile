@@ -47,6 +47,7 @@ SRCS =	ft_memset.c \
 		ft_lstmap.c \
 		ft_abs.c \
 		random/ft_random.c \
+		ft_sqrt.c \
 
 OBJS = ${SRCS:.c=.o}
 

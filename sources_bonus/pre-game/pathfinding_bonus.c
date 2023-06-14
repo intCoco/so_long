@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pathfinding.c                                      :+:      :+:    :+:   */
+/*   pathfinding_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 17:37:22 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:42:47 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../solong.h"
+#include "../../solong_bonus.h"
 
 // Prints every steps of pathfinding.
 
@@ -55,6 +55,8 @@ void	ft_pathfinding(t_map *map, int x, int y)
 		map->tab[y][x] = 'c';
 	else if (map->tab[y][x] == 'E')
 		map->tab[y][x] = 'e';
+	else if (map->tab[y][x] == 'M')
+		map->tab[y][x] = 'm';
 	if (map->tab[y][x] == 'x' || map->tab[y][x] == 'p' || map->tab[y][x] == 'c')
 	{
 		ft_pathfinding(map, x, y + 1);

@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:23:13 by chuchard          #+#    #+#             */
-/*   Updated: 2022/12/28 19:06:00 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:33:15 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ size_t	ft_intlen(int n)
 
 int	my_rand(int32_t seed)
 {
-    int32_t hi;
-	int32_t lo;
+	int32_t	hi;
+	int32_t	lo;
 
 	hi = seed / (MOD / MULT);
 	lo = seed % (MOD / MULT);

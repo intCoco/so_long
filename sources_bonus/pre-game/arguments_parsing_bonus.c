@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arguments_parsing.c                                :+:      :+:    :+:   */
+/*   arguments_parsing_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:37:57 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:28:44 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:42:23 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../solong.h"
+#include "../../solong_bonus.h"
 
 int	ft_checkmapname(char *str)
 {
@@ -29,7 +29,7 @@ int	ft_checkmapname(char *str)
 
 int	main_args_parsing(int ac, char **av)
 {
-	if (ft_strncmp(av[0], "./so_long", -1) != 0)
+	if (ft_strncmp(av[0], "./so_long_bonus", -1) != 0)
 		return (ft_printf("Please run the program directly from the "
 				"main directory\n"));
 	if (ac > 2)

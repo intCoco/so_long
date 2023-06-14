@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solong.h                                           :+:      :+:    :+:   */
+/*   solong_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:27:33 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 17:41:27 by chuchard         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:25:13 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_obj {
 	int	p_nb;
 	int	e_nb;
 	int	c_nb;
+	int	m_nb;
 }				t_obj;
 
 typedef struct s_error {
@@ -45,6 +46,7 @@ typedef struct s_error {
 
 typedef struct s_map {
 	char		**tab;
+	char		**tab2;
 	t_vector	size;
 	t_obj		obj;
 	t_error		error;
@@ -71,12 +73,31 @@ typedef struct s_char {
 }				t_char;
 
 typedef struct s_sprites {
-	t_image		pl[4];
-	t_image		fpl;
+	t_image		pl[2][3][4];
+	t_image		pc[4];
+	t_image		fpl[4];
+	t_image		fpl_sav;
+	t_image		en[3][4];
+	t_image		bg;
+	t_image		nb[10];
 	t_image		pkb;
-	t_image		ground;
 	t_image		wall;
-	t_image		intro;
+	t_image		ground;
+	t_image		block[8];
+	t_image		flower[6];
+	t_image		intro[7];
+	t_image		anim[12];
+	t_image		anim2[2];
+	t_image		excl;
+	t_image		dia_box[2];
+	t_image		dk[4];
+	t_image		fpl_dia;
+	t_image		arw;
+	t_image		pkm[3][3][3][4];
+	t_image		pkm_anim[24];
+	t_image		pkm_sel[3];
+	t_image		crs[3];
+	t_image		bol_crs;
 }				t_sprites;
 
 typedef struct s_pg {
@@ -86,6 +107,24 @@ typedef struct s_pg {
 	t_sprites	sp;
 	t_char		ex;
 	t_char		pl;
+	t_char		en;
+	t_char		pkm;
+	int			excl_b;
+	int			pick;
+	int			begin;
+	int			end;
+	int			timer;
+	int			split;
+	int			blink;
+	int			run;
+	int			i;
+	int			frame;
+	int			lkey;		//previous key pressed (saved for next pok move)
+	int			pkm_nb;		//current pok selected
+	int			pkm_ev;		//current pok evolution
+	int			cur_sel;	//temp pok selection before validation
+	int			select;		//pokemon selection state (0-not selected/1-selected for boolean/2-def selected)
+	int			bol;		//boolean pok selection
 	int			hold[4];	//input/release
 }				t_prog;
 
@@ -94,20 +133,17 @@ t_prog		ft_mapinit(t_prog pg);
 int			ft_check_error(t_prog pg);
 int			ft_input(int key, t_prog *pg);
 int			ft_update(t_prog *pg);
+void		draw_wall(t_prog pg);
 void		print_game(t_prog *pg);
+void		ft_find_p(t_prog *pg);
+void		ft_print_pathfinding(t_map map);
+void		ft_encheck(t_prog *pg);
+void		ft_interac_en(t_prog *pg, t_vector *cd);
 int			ft_close(int merror);
 void		ft_pick(t_prog *pg);
 void		ft_fcg_cood(t_char *chr);
 void		ft_dir_input(int key, t_char *chr);
 int			ft_move(int key, t_char *chr);
-void		player_behavior(t_prog *pg);
-void		ft_check_map(t_prog *pg);
-void		ft_check_pathfinding(t_map *map);
-void		ft_print_error(t_map map);
-void		ft_pathfinding(t_map *map, int x, int y);
-int			main_args_parsing(int ac, char **av);
-int			ft_input(int key, t_prog *pg);
-int			ft_release(int key, t_prog *pg);
 
 t_vector	ad(int x, int y);
 void		print_im(t_prog pg, t_image im, int x, int y);
