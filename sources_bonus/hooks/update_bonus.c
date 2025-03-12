@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:27:06 by chuchard          #+#    #+#             */
-/*   Updated: 2024/12/13 07:25:23 by chuchard         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:18:14 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,47 @@ void	console_anim(t_prog *pg)
 	}
 }
 
+#include <sys/time.h>
+long get_time_in_seconds()
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec * 1000 + tv.tv_usec / 1000; // Retourne le temps en millisecondes
+}
+
 // This function is called on every loop/frame.
 // It's used to make the animations like the opening one,
 // to smoothen the movements and to make timers.
 
 int	ft_update(t_prog *pg)
 {
-	pg->frame++;
-	if (pg->frame > 50)
-		pg->frame = 0;
-	if ((pg->begin <= 2 || pg->excl_b > 0) && pg->timer <= 50)						// Fleche des box de dialogue + point d'excl
-		pg->timer += 2;
-	else
-		pg->timer = 0;
+    long current_time = get_time_in_seconds();
 
-	if (pg->begin == 1 && pg->frame % 7 == 0 && pg->i < 23)							// Anim valise
-		pg->i++;
-	else if (pg->i >= 23 && pg->begin == 2)
-		pg->i = 0;
+    if (current_time - pg->last_time >= 13)
+    {
+        pg->last_time = current_time;
+			pg->frame++;
+		if (pg->frame > 50)
+			pg->frame = 0;
+		if ((pg->begin <= 2 || pg->excl_b > 0) && pg->timer <= 50)						// Fleche des box de dialogue + point d'excl
+			pg->timer += 2;
+		else
+			pg->timer = 0;
+		if (pg->begin == 1 && pg->frame % 7 == 0 && pg->i < 23)							// Anim valise
+			pg->i++;
+		else if (pg->i >= 23 && pg->begin == 2)
+			pg->i = 0;
 
-	if (pg->blink > 0 && pg->blink <= 100)
-		pg->blink += 2;
-	else if (pg->begin == 3 && pg->end == 0)										// In game
-	{
-		player_behavior(pg);
-		enemy_behavior(pg);
-		pokemon_behavior(pg);
-	}
-	console_anim(pg);
-	print_game(pg);
+		if (pg->blink > 0 && pg->blink <= 100)
+			pg->blink += 2;
+		else if (pg->begin == 3 && pg->end == 0)										// In game
+		{
+			player_behavior(pg);
+			enemy_behavior(pg);
+			pokemon_behavior(pg);
+		}
+		console_anim(pg);
+		print_game(pg);
+    }
 	return (0);
 }

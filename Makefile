@@ -83,8 +83,8 @@ OBJ_BONUS = 	main_bonus.o \
 				utils_bonus.o \
 
 CFLAGS = -Wall -Wextra -Werror -Iincludes -I$(MLX_DIR)
-MLX_DIR = /home/chuchard/Desktop/solong/minilibx/minilibx_linux
-LINKS = -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lbsd libft/libft.a
+MLX_DIR = /home/chuchard/Desktop/solongfixed/minilibx/minilibx-linux
+LINKS = -L$(MLX_DIR) -lmlx -L/usr/lib -lXext -lX11 -lm -lbsd libft/libft.a
 
 NONE='\033[0m'
 GREEN='\033[32m'
@@ -98,7 +98,7 @@ $(NAME): $(OBJ)
 	@echo $(CURSIVE)$(GRAY) "  - Compiling libft..." $(NONE)
 	@make -C libft/
 	@echo $(CURSIVE)$(GRAY) "  - Compiling $(NAME)..." $(NONE)
-	@gcc $(CFLAGS) $(OBJ) $(LINKS) -o $(NAME) 
+	@gcc $(CFLAGS) $(OBJ) $(LINKS) -o $(NAME)
 	@echo $(GREEN)"	- Compiled -"$(NONE)
 
 $(OBJ): $(SRC)
@@ -111,7 +111,7 @@ $(NAME_BONUS): $(OBJ_BONUS)
 	@echo $(CURSIVE)$(GRAY) "  - Compiling libft..." $(NONE)
 	@make -C libft/
 	@echo $(CURSIVE)$(GRAY) "  - Compiling $(NAME_BONUS)..." $(NONE)
-	@gcc $(CFLAGS) $(OBJ_BONUS) $(LINKS) -o $(NAME_BONUS) 
+	@gcc $(CFLAGS) $(OBJ_BONUS) $(LINKS) -o $(NAME_BONUS)
 	@echo $(GREEN)"	- Compiled -"$(NONE)
 
 $(OBJ_BONUS): $(SRC_BONUS)

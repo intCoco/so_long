@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:27:33 by chuchard          #+#    #+#             */
-/*   Updated: 2024/12/13 06:59:21 by chuchard         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:08:59 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ typedef struct s_pg {
 	int			run;
 	int			i;
 	int			frame;
+    long     	last_time;  // Le dernier timestamp de l'événement
 	int			lkey;		//previous key pressed (saved for next pok move)
 	int			pkm_nb;		//current pok selected
 	int			pkm_ev;		//current pok evolution
