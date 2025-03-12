@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 18:40:21 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:42:45 by chuchard         ###   ########.fr       */
+/*   Updated: 2024/12/13 03:35:41 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_image	ft_new_sprite(void *mlx, char *path)
 		ft_printf("Sprite import error, please make sure no file is missing\n");
 		exit(1);
 	}
+	img.data = mlx_get_data_addr(img.ref, &img.bpp, &img.size_line, &img.endian);
 	return (img);
 }
 

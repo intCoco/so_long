@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:45:45 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:41:51 by chuchard         ###   ########.fr       */
+/*   Updated: 2024/12/13 07:08:06 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@ int	pk_selection(int key, t_prog *pg)
 {
 	if (pg->select == 0 && pg->begin == 1)											//phase de selection
 	{
-		if (key == 14)																//selection cette pokbll si on appuie sur e
+		if (key == KEY_E)																//selection cette pokbll si on appuie sur e
 		{
 			pg->pkm_nb = pg->cur_sel;
 			pg->select = 1;
 		}
-		if (key == 0 && pg->cur_sel > 0)											//change de pok si on appuie sur a
+		if (key == KEY_A && pg->cur_sel > 0)											//change de pok si on appuie sur a
 			pg->cur_sel -= 1;
-		if (key == 2 && pg->cur_sel < 2)											//ou d
+		if (key == KEY_D && pg->cur_sel < 2)											//ou d
 			pg->cur_sel += 1;
 	}
 	else if (pg->select == 1 && pg->begin == 1)										// selection pokemon
 	{
-		if (key == 13)																//si fleche haut bool = 1
+		if (key == KEY_W)																//si fleche haut bool = 1
 			pg->bol = 1;
-		if (key == 1)																//si fleche bas bool = 0
+		if (key == KEY_S)																//si fleche bas bool = 0
 			pg->bol = 0;
-		if (key == 14 && pg->bol == 1)												//valide la selection
+		if (key == KEY_E && pg->bol == 1)												//valide la selection
 			pg->begin = 2;
-		else if (key == 14 && pg->bol == 0)											//revient en arriere si on choisi "non"
+		else if (key == KEY_E && pg->bol == 0)											//revient en arriere si on choisi "non"
 			pg->select = 0;
 	}
 	return (0);
@@ -42,50 +42,64 @@ int	pk_selection(int key, t_prog *pg)
 
 void	ingame_inputs(int key, t_prog *pg)
 {
-	if (key == 14 && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'c')				//ramassage
+	if (key == KEY_E && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'c')				//ramassage
 		ft_pick(pg);
-	if (key == 14 && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'm')				//parler au mechant
+	if (key == KEY_E && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'm')				//parler au mechant
 	{
 		pg->en.d = pg->pl.d + 2;
 		if (pg->pl.d >= 2)
 			pg->en.d -= 4;
 	}
-	if (key == 3)																	//toggle course
+	if (key == KEY_F)																	//toggle course
 		pg->run += 1;
-	if (key == 14 && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'e'
+	if (key == KEY_E && pg->map.tab[pg->pl.fcg.y][pg->pl.fcg.x] == 'e'
 		&& pg->map.obj.c_nb == 0)													//exit si on parle a la fille apres avoir tout ramassé
 		ft_close(0);
-	if (key >= 83 && key <= 85)														//cheat code changement de pok
-		pg->pkm_nb = key - 83;
+	if (key == KEY_1)
+		pg->pkm_nb = 0;
+	if (key == KEY_2)
+		pg->pkm_nb = 1;
+	if (key == KEY_3)
+		pg->pkm_nb = 2;
 }
+
 
 int	ft_input(int key, t_prog *pg)
 {
-	if (pg->begin == 2 && key == 14)												// dialogue debut
+	printf("%i\n", key);
+	if (pg->begin == 2 && key == KEY_E)												// dialogue debut
 		pg->begin = 3;
 	pk_selection(key, pg);
-	if (key == 13)																	// definition des holds
+	if (key == KEY_W)																	// definition des holds
 		pg->hold[0] = 1;
-	else if (key == 0 || key == 1 || key == 2)
-		pg->hold[key + 1] = 1;
-	else if (key == 257)															//hold to run
+	if (key == KEY_A)																	// definition des holds
+		pg->hold[1] = 1;
+	if (key == KEY_S)																	// definition des holds
+		pg->hold[2] = 1;
+	if (key == KEY_D)																	// definition des holds
+		pg->hold[3] = 1;
+	else if (key == KEY_MAJ)															//hold to run
 		pg->run = 1;
 	if (pg->pl.mov == 0 && pg->begin == 3 && pg->blink == 0 && pg->excl_b == 0)		//En jeux, si inactif
 		ingame_inputs(key, pg);
-	if (key == 14 && pg->excl_b == 3 && pg->blink == 0)								//passe le dialogue du mechant
+	if (key == KEY_E && pg->excl_b == 3 && pg->blink == 0)								//passe le dialogue du mechant
 		pg->blink = 1;										 						//lance le timer et le clignotement avant l'anim de combat
-	if (key == 53)										 							//ferme la console
+	if (key == KEY_ESC)										 							//ferme la console
 		pg->end = 1;										   						//lance l'anim de fermeture
 	return (0);
 }
 
 int	ft_release(int key, t_prog *pg)
 {
-	if (key == 13)
+	if (key == KEY_W)
 		pg->hold[0] = 0;
-	if (key == 0 || key == 1 || key == 2)
-		pg->hold[key + 1] = 0;
-	else if (key == 257)
+	if (key == KEY_A)																	// definition des holds
+		pg->hold[1] = 0;
+	if (key == KEY_S)																	// definition des holds
+		pg->hold[2] = 0;
+	if (key == KEY_D)																	// definition des holds
+		pg->hold[3] = 0;
+	else if (key == KEY_MAJ)
 		pg->run = 0;
 	return (0);
 }

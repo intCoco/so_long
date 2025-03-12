@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:27:33 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 20:25:13 by chuchard         ###   ########.fr       */
+/*   Updated: 2024/12/13 06:59:21 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SOLONG_H
 
 # include "libft/libft.h"
-# include <mlx.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -22,6 +21,33 @@
 # include <string.h>
 
 # define SQ_L 42
+# if defined(__APPLE__)
+#  include "./minilibx/minilibx_mac/mlx.h"
+#  define KEY_E 14
+#  define KEY_W 13
+#  define KEY_A 0
+#  define KEY_S 1
+#  define KEY_D 2
+#  define KEY_F 3
+#  define KEY_1 83
+#  define KEY_3 85
+#  define KEY_ESC 53
+#  define KEY_MAJ 56
+# else
+#  include "./minilibx/minilibx_linux/mlx.h"
+#  define KEY_E 101
+#  define KEY_W 119
+#  define KEY_A 97
+#  define KEY_S 115
+#  define KEY_D 100
+#  define KEY_F 102
+#  define KEY_1 65436
+#  define KEY_2 65433
+#  define KEY_3 65435
+#  define KEY_ESC 65307
+#  define KEY_MAJ 65505
+# endif
+
 
 typedef struct s_vector {
 	int	x;
@@ -61,6 +87,10 @@ typedef struct s_wdw {
 /* all info needed for an image */
 typedef struct s_image {
 	void		*ref;
+    char    	*data;
+    int     	bpp;
+    int     	size_line;
+    int     	endian;
 	t_vector	size;
 }				t_image;
 
@@ -104,6 +134,7 @@ typedef struct s_pg {
 	void		*mlx;
 	t_wdw		wdw;
 	t_map		map;
+	t_image		dest;
 	t_sprites	sp;
 	t_char		ex;
 	t_char		pl;

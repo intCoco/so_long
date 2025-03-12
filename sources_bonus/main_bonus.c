@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 03:19:14 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:42:52 by chuchard         ###   ########.fr       */
+/*   Updated: 2024/12/13 05:59:47 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ int	main(int ac, char **av)
 	pg = ft_mapinit(pg);
 	pg.mlx = mlx_init();
 	pg.wdw = ft_new_window(pg.mlx, 1000, 1000, "Pokemon : Gotta catch em all");
+    pg.dest.ref = mlx_new_image(pg.mlx, 1000, 1000);
+    pg.dest.data = mlx_get_data_addr(pg.dest.ref, &pg.dest.bpp, &pg.dest.size_line, &pg.dest.endian);
 	import_all_sprites(&pg);
-	mlx_hook(pg.wdw.ref, 2, 0, ft_input, &pg);
-	mlx_hook(pg.wdw.ref, 3, 0, ft_release, &pg);
+	mlx_hook(pg.wdw.ref, 2, 1L << 0, ft_input, &pg);
+	mlx_hook(pg.wdw.ref, 3, 1L << 1, ft_release, &pg);
 	mlx_hook(pg.wdw.ref, 17, 0, ft_close, 0);
 	mlx_loop_hook(pg.mlx, *ft_update, &pg);
 	mlx_loop(pg.mlx);

@@ -82,8 +82,9 @@ OBJ_BONUS = 	main_bonus.o \
 				readmap_bonus.o \
 				utils_bonus.o \
 
-CFLAGS = -Wall -Wextra -Werror
-LINKS = -lmlx -framework OpenGL -framework AppKit libft/libft.a
+CFLAGS = -Wall -Wextra -Werror -Iincludes -I$(MLX_DIR)
+MLX_DIR = /home/chuchard/Desktop/solong/minilibx/minilibx_linux
+LINKS = -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lbsd libft/libft.a
 
 NONE='\033[0m'
 GREEN='\033[32m'

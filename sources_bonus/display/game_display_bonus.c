@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:40:47 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 16:47:30 by chuchard         ###   ########.fr       */
+/*   Updated: 2024/12/13 06:49:49 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,35 @@ void	print_map(t_prog pg);
 void	print_npc_interactions(t_prog pg);
 void	ft_fight_anim(t_prog *pg);
 
+void fill_image(t_image *img, unsigned int color)
+{
+    unsigned int *img_data;
+    int img_width, img_height;
+    int i, j;
+
+    // Récupérer les données de l'image
+    img_data = (unsigned int *)img->data;
+    img_width = 1000;
+    img_height = 1000;
+
+    // Parcourir tous les pixels et les remplir avec la couleur
+    for (j = 0; j < img_height; j++)
+    {
+        for (i = 0; i < img_width; i++)
+        {
+            img_data[j * img_width + i] = color;
+        }
+    }
+}
+
 void	print_game(t_prog *pg)
 {
-	mlx_clear_window(pg->mlx, pg->wdw.ref);
+	fill_image(&pg->dest, 0x000000);
 	if (pg->begin != 0 && pg->end == 0)
 	{
 		if (pg->begin == 1)
 			print_select_menu(*pg);
-		else if (pg->split == 0 && !((pg->blink > 25 && pg->blink < 50)
+		if (pg->split == 0 && !((pg->blink > 25 && pg->blink < 50)
 				|| (pg->blink > 75 && pg->blink < 100)) && pg->begin > 1)
 			print_map(*pg);
 		print_npc_interactions(*pg);
@@ -61,4 +82,5 @@ void	print_game(t_prog *pg)
 		print_im(*pg, pg->sp.intro[6 - pg->i], 500, 1000);
 	else
 		print_im(*pg, pg->sp.intro[pg->i], 500, 1000);
+	mlx_put_image_to_window(pg->mlx, pg->wdw.ref, pg->dest.ref, 0, 0);
 }

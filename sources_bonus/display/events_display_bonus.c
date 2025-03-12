@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 20:40:55 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:41:38 by chuchard         ###   ########.fr       */
+/*   Updated: 2024/12/13 07:12:03 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_fight_anim(t_prog *pg)
 {
 	if (pg->frame == 2 && pg->i < 10)
 		pg->i += 1;
-	else if (pg->frame >= 5)
+	else if (pg->frame >= 2)
 		pg->frame = 0;
 	if (pg->i == 10 && pg->split == 0)
 		pg->split = 1;

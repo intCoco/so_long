@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:27:06 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:41:55 by chuchard         ###   ########.fr       */
+/*   Updated: 2024/12/13 07:25:23 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_update(t_prog *pg)
 	else
 		pg->timer = 0;
 
-	if (pg->begin == 1 && pg->frame % 5 == 0 && pg->i < 23)							// Anim valise
+	if (pg->begin == 1 && pg->frame % 7 == 0 && pg->i < 23)							// Anim valise
 		pg->i++;
 	else if (pg->i >= 23 && pg->begin == 2)
 		pg->i = 0;

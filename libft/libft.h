@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:48:56 by chuchard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:30:19 by chuchard         ###   ########.fr       */
+/*   Updated: 2024/12/13 03:22:02 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <stdint.h>
 # include "printf.h"
 
 typedef struct s_list
