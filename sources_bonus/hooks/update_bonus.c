@@ -6,7 +6,7 @@
 /*   By: chuchard <chuchard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:27:06 by chuchard          #+#    #+#             */
-/*   Updated: 2025/03/12 15:18:14 by chuchard         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:26:45 by chuchard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int	ft_update(t_prog *pg)
 		if (pg->frame > 50)
 			pg->frame = 0;
 		if ((pg->begin <= 2 || pg->excl_b > 0) && pg->timer <= 50)						// Fleche des box de dialogue + point d'excl
-			pg->timer += 2;
+			pg->timer += 1;
 		else
 			pg->timer = 0;
-		if (pg->begin == 1 && pg->frame % 7 == 0 && pg->i < 23)							// Anim valise
+		if (pg->begin == 1 && pg->frame % 5 == 0 && pg->i < 23)							// Anim valise
 			pg->i++;
 		else if (pg->i >= 23 && pg->begin == 2)
 			pg->i = 0;
